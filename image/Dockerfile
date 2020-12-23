@@ -1,6 +1,6 @@
 # Use osixia/light-baseimage
 # sources: https://github.com/osixia/docker-light-baseimage
-FROM osixia/light-baseimage:alpine-0.1.6-dev
+FROM linkvt/osixia_light-baseimage:fix-alpine-arm-builds-dev
 
 # Keepalived version
 ARG KEEPALIVED_VERSION=2.0.20
