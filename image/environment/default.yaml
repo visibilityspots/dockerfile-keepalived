@@ -15,6 +15,9 @@ KEEPALIVED_VIRTUAL_IPS:
   - 192.168.1.231
   - 192.168.1.232
 
+KEEPALIVED_VIRTUAL_ROUTES:
+  - 192.168.1.0/24 dev eth0 scope link src 192.168.1.231
+
 KEEPALIVED_NOTIFY: /container/service/keepalived/assets/notify.sh
 
 KEEPALIVED_ROUTER_ID: 51

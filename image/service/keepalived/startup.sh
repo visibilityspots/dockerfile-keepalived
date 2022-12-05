@@ -38,6 +38,13 @@ if [ ! -e "$FIRST_START_DONE" ]; then
   done
   sed -i "/{{ KEEPALIVED_VIRTUAL_IPS }}/d" ${CONTAINER_SERVICE_DIR}/keepalived/assets/keepalived.conf
 
+  # virtual routes
+  for vip in $(complex-bash-env iterate KEEPALIVED_VIRTUAL_ROUTES)
+  do
+    sed -i "s|{{ KEEPALIVED_VIRTUAL_ROUTES }}|${!vip}\n    {{ KEEPALIVED_VIRTUAL_ROUTES }}|g" ${CONTAINER_SERVICE_DIR}/keepalived/assets/keepalived.conf
+  done
+  sed -i "/{{ KEEPALIVED_VIRTUAL_ROUTES }}/d" ${CONTAINER_SERVICE_DIR}/keepalived/assets/keepalived.conf
+
   touch $FIRST_START_DONE
 fi
 
