@@ -3,7 +3,7 @@
 FROM linkvt/osixia_light-baseimage:fix-alpine-arm-builds-dev
 
 # Keepalived version
-ARG KEEPALIVED_VERSION=2.0.20
+ARG KEEPALIVED_VERSION=2.2.7
 
 # Download, build and install Keepalived
 RUN apk --no-cache add \
