@@ -6,7 +6,7 @@
 
 [hub]: https://hub.docker.com/r/osixia/keepalived/
 
-Latest release: 2.0.20 - Keepalived 2.0.20 - [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/keepalived/) 
+Latest release: 2.2.7 - [Changelog](CHANGELOG.md) | [Docker Hub](https://hub.docker.com/r/osixia/keepalived/) 
 
 **A docker image to run Keepalived.**
 > [keepalived.org](http://keepalived.org/)
