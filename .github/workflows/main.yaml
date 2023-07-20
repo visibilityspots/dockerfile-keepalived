@@ -32,4 +32,4 @@ jobs:
           push: true
           tags: |
             visibilityspots/keepalived:latest
-            visibilityspots/keepalived:2.2.7
+            visibilityspots/keepalived:2.2.8

@@ -5,6 +5,11 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [2.2.8] - 2023-07-20
+### Changed
+  - Upgrade keepalived version to 2.2.8
+  - Upgrade alpine version to 3.18.2
+
 ## [2.2.7] - 2022-12-05
 ### Changed
   - Upgrade keepalived version to 2.2.7

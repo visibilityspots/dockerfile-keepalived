@@ -1,5 +1,5 @@
-NAME = osixia/keepalived
-VERSION = 2.0.20
+NAME = visibilityspots/keepalived
+VERSION = 2.2.8
 
 .PHONY: build build-nocache test tag-latest push push-latest release git-tag-version
 
