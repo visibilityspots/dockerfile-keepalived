@@ -1,0 +1,11 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  main:
+    uses: visibilityspots/dockerfile-cloudflared/.github/workflows/main.yml@main
+    secrets:
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}

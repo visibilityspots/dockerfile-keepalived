@@ -1,0 +1,12 @@
+name: trivy
+
+on:
+  push:
+    tags:
+      - '*'
+  schedule:
+    - cron: '44 19 * * 4'
+
+jobs:
+  scan:
+    uses: visibilityspots/dockerfile-cloudflared/.github/workflows/trivy.yml@main
