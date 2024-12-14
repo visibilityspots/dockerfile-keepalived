@@ -5,6 +5,11 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [v2.3.1] - 2024-12-14
+### :wrench: Chores
+- [`d0a1174`](https://github.com/visibilityspots/dockerfile-keepalived/commit/d0a1174369be18a9ff38bc0aa005845b25b5187f) - **update**: keepalived v2.3.1 + alpine v3.21.0 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+
 ## [v2.2.8] - 2024-12-14
 ### :sparkles: New Features
 - [`8c07e24`](https://github.com/visibilityspots/dockerfile-keepalived/commit/8c07e241e6a9af93cbae5cff3adcdd4f0fb0f0d0) - **ci**: enabled github actions *(commit by [@visibilityspots](https://github.com/visibilityspots))*
@@ -279,3 +284,4 @@ Initial release
 [0.1.2]: https://github.com/osixia/docker-keepalived/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/osixia/docker-keepalived/compare/v0.1.0...v0.1.1
 [v2.2.8]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.0.20...v2.2.8
+[v2.3.1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.2.8...v2.3.1
