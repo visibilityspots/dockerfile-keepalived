@@ -5,6 +5,26 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [v2.2.8] - 2024-12-14
+### :sparkles: New Features
+- [`8c07e24`](https://github.com/visibilityspots/dockerfile-keepalived/commit/8c07e241e6a9af93cbae5cff3adcdd4f0fb0f0d0) - **ci**: enabled github actions *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`2bbc1de`](https://github.com/visibilityspots/dockerfile-keepalived/commit/2bbc1de16c76d5a698a4115f22337d507004bf98) - **conf**: added virtual routes option *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+### :bug: Bug Fixes
+- [`959b629`](https://github.com/visibilityspots/dockerfile-keepalived/commit/959b6292598eee5812338d47564ecf1710816cb5) - **ci**: triggered by branch stable over master *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`76ef338`](https://github.com/visibilityspots/dockerfile-keepalived/commit/76ef338a112263d015188901b148d1781187b788) - **ci**: pointing to proper context *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`09324fb`](https://github.com/visibilityspots/dockerfile-keepalived/commit/09324fbd60abfaf67fa63d40992424981a21bcb5) - **ci**: remove arm v6 unsupported architecture *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`ae45e92`](https://github.com/visibilityspots/dockerfile-keepalived/commit/ae45e92d980a15cd65cfa917660ef6a3715aeece) - **docker**: fixed dockerfile *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+### :wrench: Chores
+- [`c087c22`](https://github.com/visibilityspots/dockerfile-keepalived/commit/c087c22202e214e5045b8cffc8614a6630ba0b5b) - **update**: keepalive version 2.2.7 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`465954d`](https://github.com/visibilityspots/dockerfile-keepalived/commit/465954dc03d860f6b319cd0d523ff1b93212464b) - **doc**: updated documenation regarding new release and changelog *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`f793408`](https://github.com/visibilityspots/dockerfile-keepalived/commit/f7934088abe91d12ea27580ed199e9a364fbc9e8) - **update**: keepalived version 2.2.8 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`7607f37`](https://github.com/visibilityspots/dockerfile-keepalived/commit/7607f3723242ffe91556e85b630c65247508a26c) - **ci**: refactoring workflows to reusable ones *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`336561a`](https://github.com/visibilityspots/dockerfile-keepalived/commit/336561a6d43626f064eff7f286109cf174849a6c) - **del**: removed unused files from fork after refactoring *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`9c49f94`](https://github.com/visibilityspots/dockerfile-keepalived/commit/9c49f9410c34dad0015717bd8803c63b32f66064) - **refactor**: refactored and upgraded towards keepalived v2.2.8 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+
 ## [2.2.8] - 2023-07-20
 ### Changed
   - Upgrade keepalived version to 2.2.8
@@ -258,3 +278,4 @@ Initial release
 [0.1.3]: https://github.com/osixia/docker-keepalived/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/osixia/docker-keepalived/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/osixia/docker-keepalived/compare/v0.1.0...v0.1.1
+[v2.2.8]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.0.20...v2.2.8
