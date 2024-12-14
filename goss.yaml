@@ -1,0 +1,20 @@
+package:
+  keepalived:
+    installed: true
+    versions:
+      - 2.2.8-r0
+  envsubst:
+    name: gettext-envsubst
+    installed: true
+
+file:
+  /etc/keepalived/keepalived.conf.tmpl:
+    exists: true
+  /etc/keepalived/keepalived.conf:
+    exists: true
+  /usr/local/bin/keepalived-notify.sh:
+    exists: true
+
+command:
+  keepalived --version:
+    exit-status: 0
