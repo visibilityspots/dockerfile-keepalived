@@ -26,6 +26,7 @@ $ docker run --cap-add=NET_ADMIN --cap-add=NET_BROADCAST --cap-add=NET_RAW --net
 
 Environment variables defaults are set in the Dockerfile and can be overriden;
 
+```
 ENV KEEPALIVED_INTERFACE eth0
 ENV KEEPALIVED_STATE BACKUP
 ENV KEEPALIVED_ROUTER_ID 21
@@ -35,6 +36,7 @@ ENV KEEPALIVED_VIRTUAL_IPS 192.168.0.10
 ENV KEEPALIVED_VIRTUAL_ROUTES 192.168.0.0/24 dev eth0 scope link src 192.168.0.10
 ENV KEEPALIVED_PASSWORD d0ck3r
 ENV KEEPALIVED_NOTIFY notify "/usr/local/bin/keepalived-notify.sh"
+```
 
 ### Override ENV variables
 
