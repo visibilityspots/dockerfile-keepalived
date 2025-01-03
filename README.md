@@ -16,7 +16,13 @@ orginally based on the work of [linkvt](https://github.com/linkvt/docker-keepali
 
 ## run
 
-This image require the kernel module ip_vs loaded on the host (`modprobe ip_vs`) and need to be run with : --cap-add=NET_ADMIN --net=host
+This image require the kernel module ip_vs loaded on the host;
+
+```
+# modprobe ip_vs
+```
+
+and needs to be run with the NET_ADMIN linux capability using the host network mode;
 
 ```
 $ docker run --cap-add=NET_ADMIN --cap-add=NET_BROADCAST --cap-add=NET_RAW --net=host --name keepalived --rm visibilityspots/keepalived:latest
