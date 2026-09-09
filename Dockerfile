@@ -1,4 +1,4 @@
-FROM alpine:3.21.2
+FROM alpine:3.24.1
 
 ENV KEEPALIVED_INTERFACE=eth0
 ENV KEEPALIVED_STATE=BACKUP
@@ -14,7 +14,7 @@ ENV KEEPALIVED_NOTIFY='notify "/usr/local/bin/keepalived-notify.sh"'
 # the keepalived_script user; it refuses to start when that user is missing
 RUN adduser -S -D -H -s /sbin/nologin keepalived_script; \
     apk add --no-cache \
-      keepalived==2.3.1-r0 \
+      keepalived==2.3.4-r2 \
       envsubst; \
     rm -rf /var/cache/apk/*;
 

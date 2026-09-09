@@ -2,7 +2,7 @@ package:
   keepalived:
     installed: true
     versions:
-      - 2.3.1-r0
+      - 2.3.4-r2
   envsubst:
     name: gettext-envsubst
     installed: true
