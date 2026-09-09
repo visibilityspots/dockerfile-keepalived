@@ -5,6 +5,16 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [v2.3.4] - 2026-09-09
+### :bug: Bug Fixes
+- [`9ce4a20`](https://github.com/visibilityspots/dockerfile-keepalived/commit/9ce4a2066bca0ee3f40f53ad65166d5fbbd22cdf) - **conf**: render unicast peers per line and add the keepalived_script user *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+### :wrench: Chores
+- [`092c788`](https://github.com/visibilityspots/dockerfile-keepalived/commit/092c788e98d8836c49ce747d2db67c9dcd01034b) - **doc**: created code block for config env params *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`aa4c5c0`](https://github.com/visibilityspots/dockerfile-keepalived/commit/aa4c5c046513a18f809d931bd5a3315c4de112a6) - **doc**: restructured docker run section *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`5c031cc`](https://github.com/visibilityspots/dockerfile-keepalived/commit/5c031cc49a9f31852c430b5e66f0e3a87c2a2618) - **update**: keepalived v2.3.4 + alpine v3.24.1 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+
 ## [v2.3.1] - 2024-12-14
 ### :wrench: Chores
 - [`d0a1174`](https://github.com/visibilityspots/dockerfile-keepalived/commit/d0a1174369be18a9ff38bc0aa005845b25b5187f) - **update**: keepalived v2.3.1 + alpine v3.21.0 *(commit by [@visibilityspots](https://github.com/visibilityspots))*
@@ -285,3 +295,4 @@ Initial release
 [0.1.1]: https://github.com/osixia/docker-keepalived/compare/v0.1.0...v0.1.1
 [v2.2.8]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.0.20...v2.2.8
 [v2.3.1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.2.8...v2.3.1
+[v2.3.4]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.1...v2.3.4
