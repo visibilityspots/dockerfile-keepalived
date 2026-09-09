@@ -1,5 +1,7 @@
 global_defs {
   default_interface ${KEEPALIVED_INTERFACE}
+  enable_script_security
+  max_auto_priority -1
 }
 
 vrrp_instance VI_1 {

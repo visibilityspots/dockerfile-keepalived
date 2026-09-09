@@ -7,7 +7,14 @@ package:
     name: gettext-envsubst
     installed: true
 
+user:
+  keepalived_script:
+    exists: true
+
 file:
+  /usr/sbin/keepalived:
+    exists: true
+    mode: "0755"
   /etc/keepalived/keepalived.conf.tmpl:
     exists: true
   /etc/keepalived/keepalived.conf:
@@ -17,4 +24,13 @@ file:
 
 command:
   keepalived --version:
+    exit-status: 0
+  # every unicast peer must end up on its own line
+  grep -cE '^[[:space:]]*192\.168\.0\.1[12]$' /etc/keepalived/keepalived.conf:
+    exit-status: 0
+    stdout:
+      - "2"
+  # the rendered config must actually parse; eth0 is swapped for whatever
+  # interface the test runtime provides so the check is runtime independent
+  sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); sed "s/eth0/$IF/g" /etc/keepalived/keepalived.conf > /tmp/goss.conf; keepalived --config-test -f /tmp/goss.conf':
     exit-status: 0
