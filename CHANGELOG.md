@@ -5,6 +5,12 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [v2.3.4-1] - 2026-09-13
+### :sparkles: New Features
+- [`b6d314f`](https://github.com/visibilityspots/dockerfile-keepalived/commit/b6d314f38965963ff5d56fe665b7854cb3b068e0) - **conf**: optional health check and virtual mac *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+- [`60fe04e`](https://github.com/visibilityspots/dockerfile-keepalived/commit/60fe04efedf80772367507448b6c7f3994381af9) - **conf**: advert interval and vrrp version *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+
 ## [v2.3.4] - 2026-09-09
 ### :bug: Bug Fixes
 - [`9ce4a20`](https://github.com/visibilityspots/dockerfile-keepalived/commit/9ce4a2066bca0ee3f40f53ad65166d5fbbd22cdf) - **conf**: render unicast peers per line and add the keepalived_script user *(commit by [@visibilityspots](https://github.com/visibilityspots))*
@@ -296,3 +302,4 @@ Initial release
 [v2.2.8]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.0.20...v2.2.8
 [v2.3.1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.2.8...v2.3.1
 [v2.3.4]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.1...v2.3.4
+[v2.3.4-1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.4...v2.3.4-1
