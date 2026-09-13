@@ -37,6 +37,8 @@ ENV KEEPALIVED_INTERFACE eth0
 ENV KEEPALIVED_STATE BACKUP
 ENV KEEPALIVED_ROUTER_ID 21
 ENV KEEPALIVED_PRIORITY 150
+ENV KEEPALIVED_ADVERT_INT 1
+ENV KEEPALIVED_VERSION 2
 ENV KEEPALIVED_UNICAST_PEERS 192.168.0.11 - 192.168.0.12
 ENV KEEPALIVED_VIRTUAL_IPS 192.168.0.10
 ENV KEEPALIVED_VIRTUAL_ROUTES 192.168.0.0/24 dev eth0 scope link src 192.168.0.10
@@ -66,6 +68,20 @@ The script runs with `weight 0`: after `KEEPALIVED_CHECK_FALL` failures the
 instance goes to FAULT and releases the virtual ip to a peer, rather than
 lowering its own priority. Leaving `KEEPALIVED_CHECK_COMMAND` empty renders
 neither block, so nothing changes for an existing configuration.
+
+### Failover timing
+
+`KEEPALIVED_ADVERT_INT` is the advertisement interval in seconds and accepts
+fractions. It only matters when a host disappears without warning: a backup
+waits roughly three intervals before it declares the master gone. A master that
+fails its health check, or that is stopped cleanly, sends a priority 0 advert
+and is taken over right away no matter what this is set to.
+
+Values below one second need `KEEPALIVED_VERSION=3`: VRRPv2 only accepts whole
+seconds and refuses the configuration otherwise. VRRPv3 in turn has no
+authentication - the protocol dropped it - so the `authentication` block is left
+out of the configuration when version 3 is selected. On a shared segment that
+trade needs to be a deliberate one.
 
 ### Virtual mac
 

@@ -51,6 +51,14 @@ command:
   # real configuration would race the test above.
   sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); KEEPALIVED_CONF=/tmp/vmac.conf KEEPALIVED_INTERFACE=$IF KEEPALIVED_VIRTUAL_ROUTES= KEEPALIVED_CHECK_COMMAND=true KEEPALIVED_USE_VMAC=true /usr/local/bin/entrypoint.sh true && keepalived --config-test -f /tmp/vmac.conf && grep -q "check_service" /tmp/vmac.conf && grep -q "track_script" /tmp/vmac.conf && grep -q "use_vmac" /tmp/vmac.conf && grep -q "vmac_xmit_base" /tmp/vmac.conf':
     exit-status: 0
+  # a fractional advert_int is what sub second failover needs, and it only
+  # parses under VRRPv3; under v2 keepalived refuses it and rounds. The
+  # authentication block must be gone in that case, since v3 has no such thing.
+  sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); KEEPALIVED_CONF=/tmp/advert.conf KEEPALIVED_INTERFACE=$IF KEEPALIVED_VIRTUAL_ROUTES= KEEPALIVED_ADVERT_INT=0.5 KEEPALIVED_VERSION=3 /usr/local/bin/entrypoint.sh true && keepalived --config-test -f /tmp/advert.conf && grep -qx "  advert_int 0.5" /tmp/advert.conf && ! grep -q auth_pass /tmp/advert.conf':
+    exit-status: 0
+  # the default stays VRRPv2 with authentication and whole second adverts
+  sh -c 'grep -qx "  version 2" /etc/keepalived/keepalived.conf && grep -q auth_pass /etc/keepalived/keepalived.conf && grep -qx "  advert_int 1" /etc/keepalived/keepalived.conf':
+    exit-status: 0
   # the wrapper must run whatever the environment hands it and pass the exit
   # status through untouched, since that status is what drives the failover
   sh -c 'KEEPALIVED_CHECK_COMMAND="exit 7" /usr/local/bin/keepalived-check.sh; test $? -eq 7':

@@ -9,9 +9,11 @@ ${KEEPALIVED_VRRP_SCRIPT}
 vrrp_instance VI_1 {
   interface ${KEEPALIVED_INTERFACE}
 
+  version ${KEEPALIVED_VERSION}
   state ${KEEPALIVED_STATE}
   virtual_router_id ${KEEPALIVED_ROUTER_ID}
   priority ${KEEPALIVED_PRIORITY}
+  advert_int ${KEEPALIVED_ADVERT_INT}
   nopreempt
 
   ${KEEPALIVED_VMAC}
@@ -28,10 +30,7 @@ vrrp_instance VI_1 {
     ${KEEPALIVED_VIRTUAL_ROUTES}
   }
 
-  authentication {
-    auth_type PASS
-    auth_pass ${KEEPALIVED_PASSWORD}
-  }
+  ${KEEPALIVED_AUTH}
 
   ${KEEPALIVED_TRACK_SCRIPT}
 

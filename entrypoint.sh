@@ -35,6 +35,26 @@ else
 fi
 export KEEPALIVED_VRRP_SCRIPT KEEPALIVED_TRACK_SCRIPT
 
+# VRRPv3 dropped authentication from the protocol: keepalived ignores the block
+# and warns about it, so it is left out entirely rather than rendered and
+# discarded. VRRPv3 is also the only version that accepts a fractional
+# advert_int; v2 rounds it to whole seconds and refuses the config.
+case "${KEEPALIVED_VERSION}" in
+  3)
+    KEEPALIVED_AUTH=""
+    ;;
+  *)
+    KEEPALIVED_AUTH=$(cat <<EOF
+authentication {
+    auth_type PASS
+    auth_pass ${KEEPALIVED_PASSWORD}
+  }
+EOF
+)
+    ;;
+esac
+export KEEPALIVED_AUTH
+
 # without a virtual mac the virtual ip migrates between the real mac addresses
 # of the participating hosts, which mac aware equipment reports as an ip
 # conflict. use_vmac gives the address a stable 00:00:5e:00:01:<router_id> mac
