@@ -4,6 +4,8 @@ global_defs {
   max_auto_priority -1
 }
 
+${KEEPALIVED_VRRP_SCRIPT}
+
 vrrp_instance VI_1 {
   interface ${KEEPALIVED_INTERFACE}
 
@@ -11,6 +13,8 @@ vrrp_instance VI_1 {
   virtual_router_id ${KEEPALIVED_ROUTER_ID}
   priority ${KEEPALIVED_PRIORITY}
   nopreempt
+
+  ${KEEPALIVED_VMAC}
 
   unicast_peer {
     ${KEEPALIVED_UNICAST_PEERS}
@@ -28,6 +32,8 @@ vrrp_instance VI_1 {
     auth_type PASS
     auth_pass ${KEEPALIVED_PASSWORD}
   }
+
+  ${KEEPALIVED_TRACK_SCRIPT}
 
   ${KEEPALIVED_NOTIFY}
 }

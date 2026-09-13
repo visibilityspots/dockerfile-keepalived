@@ -42,7 +42,40 @@ ENV KEEPALIVED_VIRTUAL_IPS 192.168.0.10
 ENV KEEPALIVED_VIRTUAL_ROUTES 192.168.0.0/24 dev eth0 scope link src 192.168.0.10
 ENV KEEPALIVED_PASSWORD d0ck3r
 ENV KEEPALIVED_NOTIFY notify "/usr/local/bin/keepalived-notify.sh"
+ENV KEEPALIVED_CHECK_COMMAND
+ENV KEEPALIVED_CHECK_INTERVAL 2
+ENV KEEPALIVED_CHECK_TIMEOUT 2
+ENV KEEPALIVED_CHECK_FALL 2
+ENV KEEPALIVED_CHECK_RISE 2
+ENV KEEPALIVED_USE_VMAC false
+ENV KEEPALIVED_CONF /etc/keepalived/keepalived.conf
 ```
+
+### Health check
+
+By default the virtual ip only follows the host: it moves when keepalived stops
+answering, not when the service behind the address is broken. Setting
+`KEEPALIVED_CHECK_COMMAND` renders a `vrrp_script` and a `track_script` that run
+the command every `KEEPALIVED_CHECK_INTERVAL` seconds;
+
+```
+$ docker run --cap-add=NET_ADMIN --cap-add=NET_BROADCAST --cap-add=NET_RAW --net=host --env KEEPALIVED_CHECK_COMMAND="wget -q -O /dev/null http://127.0.0.1:8082/ping" --name keepalived --rm visibilityspots/keepalived:latest
+```
+
+The script runs with `weight 0`: after `KEEPALIVED_CHECK_FALL` failures the
+instance goes to FAULT and releases the virtual ip to a peer, rather than
+lowering its own priority. Leaving `KEEPALIVED_CHECK_COMMAND` empty renders
+neither block, so nothing changes for an existing configuration.
+
+### Virtual mac
+
+Without a virtual mac the virtual ip migrates between the real mac addresses of
+the participating hosts, which mac aware equipment reports as an ip conflict
+after every failover. `KEEPALIVED_USE_VMAC=true` gives the address its own
+`00:00:5e:00:01:<router_id>` mac that travels with it, and adds `vmac_xmit_base`
+so the vrrp adverts keep going out over the underlying interface - without that
+the unicast adverts would be sourced from an interface that only carries the
+virtual ip.
 
 ### Override ENV variables
 

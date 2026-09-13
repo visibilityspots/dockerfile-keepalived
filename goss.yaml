@@ -21,6 +21,13 @@ file:
     exists: true
   /usr/local/bin/keepalived-notify.sh:
     exists: true
+  # enable_script_security refuses a track script on a path that is writable by
+  # anyone but root, so ownership and mode are part of the contract here
+  /usr/local/bin/keepalived-check.sh:
+    exists: true
+    mode: "0755"
+    owner: root
+    group: root
 
 command:
   keepalived --version:
@@ -33,4 +40,18 @@ command:
   # the rendered config must actually parse; eth0 is swapped for whatever
   # interface the test runtime provides so the check is runtime independent
   sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); sed "s/eth0/$IF/g" /etc/keepalived/keepalived.conf > /tmp/goss.conf; keepalived --config-test -f /tmp/goss.conf':
+    exit-status: 0
+  # without KEEPALIVED_CHECK_COMMAND neither block may appear, so existing
+  # setups keep rendering exactly what they rendered before
+  sh -c '! grep -qE "vrrp_script|track_script" /etc/keepalived/keepalived.conf':
+    exit-status: 0
+  # the default virtual route hardcodes eth0, which the test runtime does not
+  # have; it is emptied here so the test fails only on what it is about. The
+  # render goes to a temp path: goss runs tests concurrently, so touching the
+  # real configuration would race the test above.
+  sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); KEEPALIVED_CONF=/tmp/vmac.conf KEEPALIVED_INTERFACE=$IF KEEPALIVED_VIRTUAL_ROUTES= KEEPALIVED_CHECK_COMMAND=true KEEPALIVED_USE_VMAC=true /usr/local/bin/entrypoint.sh true && keepalived --config-test -f /tmp/vmac.conf && grep -q "check_service" /tmp/vmac.conf && grep -q "track_script" /tmp/vmac.conf && grep -q "use_vmac" /tmp/vmac.conf && grep -q "vmac_xmit_base" /tmp/vmac.conf':
+    exit-status: 0
+  # the wrapper must run whatever the environment hands it and pass the exit
+  # status through untouched, since that status is what drives the failover
+  sh -c 'KEEPALIVED_CHECK_COMMAND="exit 7" /usr/local/bin/keepalived-check.sh; test $? -eq 7':
     exit-status: 0
