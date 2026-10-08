@@ -1,4 +1,4 @@
-FROM alpine:3.24.1
+FROM alpine:3.24.2
 
 ENV KEEPALIVED_INTERFACE=eth0
 ENV KEEPALIVED_STATE=BACKUP
@@ -38,7 +38,8 @@ ENV KEEPALIVED_CONF=/etc/keepalived/keepalived.conf
 
 # enable_script_security makes keepalived drop privileges for notify scripts to
 # the keepalived_script user; it refuses to start when that user is missing
-RUN adduser -S -D -H -s /sbin/nologin keepalived_script; \
+RUN apk upgrade --no-cache && \
+    adduser -S -D -H -s /sbin/nologin keepalived_script; \
     apk add --no-cache \
       keepalived==2.3.4-r2 \
       envsubst; \
