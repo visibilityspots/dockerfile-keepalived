@@ -5,6 +5,11 @@ Please refer to the upstream [keepalived changelog](https://github.com/acassen/k
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project follows keepalived versioning.
 
+## [v2.3.4-2] - 2026-10-08
+### :bug: Bug Fixes
+- [`dfb7be2`](https://github.com/visibilityspots/dockerfile-keepalived/commit/dfb7be2ad9923377548486aef70de274f35dc4a8) - **security**: alpine 3.24.2 and upgrade alpine packages *(commit by [@visibilityspots](https://github.com/visibilityspots))*
+
+
 ## [v2.3.4-1] - 2026-09-13
 ### :sparkles: New Features
 - [`b6d314f`](https://github.com/visibilityspots/dockerfile-keepalived/commit/b6d314f38965963ff5d56fe665b7854cb3b068e0) - **conf**: optional health check and virtual mac *(commit by [@visibilityspots](https://github.com/visibilityspots))*
@@ -303,3 +308,4 @@ Initial release
 [v2.3.1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.2.8...v2.3.1
 [v2.3.4]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.1...v2.3.4
 [v2.3.4-1]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.4...v2.3.4-1
+[v2.3.4-2]: https://github.com/visibilityspots/dockerfile-keepalived/compare/v2.3.4-1...v2.3.4-2
