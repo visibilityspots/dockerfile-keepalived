@@ -78,6 +78,23 @@ EOF
 esac
 export KEEPALIVED_VMAC
 
+# optional policy rules that live and die with the virtual ip, like the virtual
+# routes do. A route can only pick the source address by destination; a rule
+# can pick it by protocol and port, so for instance only the replies of a udp
+# service bound to the wildcard leave from the virtual ip while the host's own
+# connections keep its own address. Empty renders no block at all.
+if [ -n "${KEEPALIVED_VIRTUAL_RULES}" ]; then
+  KEEPALIVED_VIRTUAL_RULES_BLOCK=$(cat <<EOF
+virtual_rules {
+    ${KEEPALIVED_VIRTUAL_RULES}
+  }
+EOF
+)
+else
+  KEEPALIVED_VIRTUAL_RULES_BLOCK=""
+fi
+export KEEPALIVED_VIRTUAL_RULES_BLOCK
+
 # override environment variables into configuration file. The destination is
 # overridable so a test can render somewhere harmless instead of over the
 # configuration the running keepalived is using.

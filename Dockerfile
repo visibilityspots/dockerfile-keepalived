@@ -19,6 +19,9 @@ ENV KEEPALIVED_VERSION=2
 ENV KEEPALIVED_UNICAST_PEERS="192.168.0.11 - 192.168.0.12"
 ENV KEEPALIVED_VIRTUAL_IPS=192.168.0.10
 ENV KEEPALIVED_VIRTUAL_ROUTES="192.168.0.0/24 dev eth0 scope link src 192.168.0.10"
+# optional policy rules, added and removed together with the virtual ip; empty
+# renders no virtual_rules block
+ENV KEEPALIVED_VIRTUAL_RULES=""
 ENV KEEPALIVED_PASSWORD=d0ck3r
 ENV KEEPALIVED_NOTIFY='notify "/usr/local/bin/keepalived-notify.sh"'
 

@@ -56,6 +56,14 @@ command:
   # authentication block must be gone in that case, since v3 has no such thing.
   sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); KEEPALIVED_CONF=/tmp/advert.conf KEEPALIVED_INTERFACE=$IF KEEPALIVED_VIRTUAL_ROUTES= KEEPALIVED_ADVERT_INT=0.5 KEEPALIVED_VERSION=3 /usr/local/bin/entrypoint.sh true && keepalived --config-test -f /tmp/advert.conf && grep -qx "  advert_int 0.5" /tmp/advert.conf && ! grep -q auth_pass /tmp/advert.conf':
     exit-status: 0
+  # without KEEPALIVED_VIRTUAL_RULES no virtual_rules block may appear
+  sh -c '! grep -q "virtual_rules" /etc/keepalived/keepalived.conf':
+    exit-status: 0
+  # a rule on protocol and source port, pointing at a routing table that only
+  # the virtual routes fill, must render and parse. The port is a range: a bare
+  # "sport 53" is refused as an invalid range.
+  sh -c 'IF=$(ls /sys/class/net | grep -v "^lo$" | head -1); KEEPALIVED_CONF=/tmp/rules.conf KEEPALIVED_INTERFACE=$IF KEEPALIVED_VIRTUAL_ROUTES="192.168.0.0/24 dev $IF scope link src 192.168.0.10 table 140" KEEPALIVED_VIRTUAL_RULES="ipproto udp sport 53-53 table 140 priority 100" /usr/local/bin/entrypoint.sh true && keepalived --config-test -f /tmp/rules.conf && grep -q "virtual_rules" /tmp/rules.conf && grep -q "ipproto udp sport 53-53 table 140" /tmp/rules.conf':
+    exit-status: 0
   # the default stays VRRPv2 with authentication and whole second adverts
   sh -c 'grep -qx "  version 2" /etc/keepalived/keepalived.conf && grep -q auth_pass /etc/keepalived/keepalived.conf && grep -qx "  advert_int 1" /etc/keepalived/keepalived.conf':
     exit-status: 0

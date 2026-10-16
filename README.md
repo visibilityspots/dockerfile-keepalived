@@ -42,6 +42,7 @@ ENV KEEPALIVED_VERSION 2
 ENV KEEPALIVED_UNICAST_PEERS 192.168.0.11 - 192.168.0.12
 ENV KEEPALIVED_VIRTUAL_IPS 192.168.0.10
 ENV KEEPALIVED_VIRTUAL_ROUTES 192.168.0.0/24 dev eth0 scope link src 192.168.0.10
+ENV KEEPALIVED_VIRTUAL_RULES
 ENV KEEPALIVED_PASSWORD d0ck3r
 ENV KEEPALIVED_NOTIFY notify "/usr/local/bin/keepalived-notify.sh"
 ENV KEEPALIVED_CHECK_COMMAND
@@ -92,6 +93,29 @@ after every failover. `KEEPALIVED_USE_VMAC=true` gives the address its own
 so the vrrp adverts keep going out over the underlying interface - without that
 the unicast adverts would be sourced from an interface that only carries the
 virtual ip.
+
+### Virtual rules
+
+A virtual route can only choose the source address by destination. That falls
+short for a udp service bound to the wildcard, which replies without setting a
+source address: its replies need to leave from the virtual ip, but a route with
+`src <virtual ip>` also hands that address to every connection the host opens
+itself towards the same destination, and those connections break the moment the
+virtual ip moves to a peer.
+
+`KEEPALIVED_VIRTUAL_RULES` renders a `virtual_rules` block, added and removed
+together with the virtual ip just like the virtual routes. A rule on protocol
+and source port sends only the service's replies to a table that carries the
+`src` routes, and leaves everything else on the main table;
+
+```
+KEEPALIVED_VIRTUAL_ROUTES=192.168.0.0/24 dev eth0 scope link src 192.168.0.10 table 140
+KEEPALIVED_VIRTUAL_RULES=ipproto udp sport 53-53 table 140 priority 100
+```
+
+Ports are ranges: keepalived refuses a bare `sport 53`. Leaving
+`KEEPALIVED_VIRTUAL_RULES` empty renders no block, so nothing changes for an
+existing configuration.
 
 ### Override ENV variables
 
