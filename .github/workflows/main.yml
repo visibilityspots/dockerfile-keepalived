@@ -4,6 +4,9 @@ on:
   push:
     tags:
       - '*'
+  # test only: the shared workflow skips deploy on pull requests
+  pull_request:
+    branches: [main]
 jobs:
   main:
     uses: visibilityspots/github-workflows/.github/workflows/main.yml@main
